@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
 public class _14_MagicExchangeableWords {
     public static void main(String[] args) {
@@ -10,7 +11,6 @@ public class _14_MagicExchangeableWords {
         String secondWord = words[1];
 
         boolean isExchanged = exchangeWords(firstWord,secondWord);
-
 
         System.out.println(isExchanged);
     }
@@ -24,11 +24,24 @@ public class _14_MagicExchangeableWords {
                 if(!chars.containsKey(firstWord.charAt(i))){
                     chars.put(firstWord.charAt(i),secondWord.charAt(i));
                 }
-                else if(chars.get(firstWord.charAt(i)) != secondWord.charAt(i)) {
+                else if(chars.get(firstWord.charAt(i)) != secondWord.charAt(i)
+                        || checkForEqualChars(chars, secondWord.charAt(i))) {
                     isExchanged = false;
                     break;
                 }
             }
+
         return isExchanged;
+    }
+
+    public static boolean checkForEqualChars(HashMap<Character, Character> chars, char currentChar) {
+        Set<Character> keys = chars.keySet();
+        boolean isCheck = false;
+        for(char key : keys){
+            if(chars.get(key) == currentChar){
+                isCheck = true;
+            }
+        }
+        return isCheck;
     }
 }
