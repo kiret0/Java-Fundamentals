@@ -22,10 +22,15 @@ public class _14_MagicExchangeableWords {
 
         for (int i = 0; i < firstWord.length(); i++) {
                 if(!chars.containsKey(firstWord.charAt(i))){
-                    chars.put(firstWord.charAt(i),secondWord.charAt(i));
+                    if (chars.isEmpty() || !checkForEqualChars(chars, secondWord.charAt(i))) {
+                        chars.put(firstWord.charAt(i), secondWord.charAt(i));
+                    }
+                    else{
+                        isExchanged = false;
+                        break;
+                    }
                 }
-                else if(chars.get(firstWord.charAt(i)) != secondWord.charAt(i)
-                        || checkForEqualChars(chars, secondWord.charAt(i))) {
+                else if(chars.get(firstWord.charAt(i)) != secondWord.charAt(i)) {
                     isExchanged = false;
                     break;
                 }
